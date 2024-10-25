@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Results</title>
+  <link rel="stylesheet" href="flight_results.css">
+  <style>
+    .flight-card {
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin: 10px;
+      display: inline-block;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+      cursor: pointer; /* Change cursor to pointer */
+    }
+
+    .flight-card h2 {
+      font-size: 18px;
+      margin-top: 0;
+    }
+
+    .flight-card p {
+      margin-bottom: 10px;
+    }
+
+    .flight-card:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Flight Results</h1>
+    <div id="flightResults"></div>
+  </div>
+
+  <script>
+    const resultsDiv = document.getElementById('flightResults');
+    const scriptURL = 'https://script.googleusercontent.com/macros/echo?user_content_key=IRCFik1VI273CV7zujYdQHgvr33e7pz7M7aGJ-N9g8-bjy1uYLog11aJSKNVrtqK_R7Tvkv7ey0s0u4lYeGIoJI9y7dotAy6m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnHrNugvEtZsRiU8_GT6XwxJnFwsikJoTSxWGAvb9Y4KsL1LZ8uRnRZdEtWNkpt0Ek3WzaVyf41JFOvoKg28yP7ziKlrA50qxHQ&lib=MPSYeOFbmlnACI9LlRIrfAVfNaLzcBGAC'; // Replace with your deployed script URL
+
+    // Get query parameters from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const source = urlParams.get('source');
+    const destination = urlParams.get('destination');
+
+    function formatFlightTime(dateString) {
+      const date = new Date(dateString);
+      const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: true };
+      return date.toLocaleString('en-US', options);
+    }
+
+    fetch(scriptURL)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        const filteredFlights = data.filter(flight => flight.Source === source && flight.Destination === destination);
+
+        if (filteredFlights.length === 0) {
+          resultsDiv.innerHTML = '<p>No flights found for the selected source and destination.</p>';
+        } else {
+          filteredFlights.forEach(flight => {
+            const flightCard = `
+              <div class="flight-card" onclick="viewFlightDetails('${flight['Flight ID']}', '${flight.Source}', '${flight.Destination}', '${formatFlightTime(flight['Departure Timings'])}', '${formatFlightTime(flight['Arrival Timings'])}', '${flight.Cost}', '${flight['Cancellation Probability']}')">
+                  <h2>Flight ${flight['Flight ID']}</h2>
+                  <p>Source: ${flight.Source}</p>
+                  <p>Destination: ${flight.Destination}</p>
+                  <p>Departure: ${formatFlightTime(flight['Departure Timings'])}</p>
+                  <p>Arrival: ${formatFlightTime(flight['Arrival Timings'])}</p>
+                  <p>Cost: ${flight.Cost}</p>
+                  <p>Cancellation Probability: ${flight['Cancellation Probability']}%</p>
+              </div>
+            `;
+            resultsDiv.innerHTML += flightCard;
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching flight data:', error);
+        resultsDiv.innerHTML = `<p>Error occurred while fetching flight data: ${error.message}</p>`;
+      });
+
+    function viewFlightDetails(flightId, source, destination, departure, arrival, cost, cancellation) {
+      // Redirect to booking details page with flight information as query parameters
+      const bookingURL = `booking_details.html?flightId=${flightId}&source=${source}&destination=${destination}&departure=${departure}&arrival=${arrival}&cost=${cost}&cancellation=${cancellation}`;
+      window.location.href = bookingURL;
+    }
+  </script>
+</body>
+
+</html>

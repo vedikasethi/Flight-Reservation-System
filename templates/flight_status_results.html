@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Status Result</title>
+    <link rel="stylesheet" href="flight_status_results.css"> <!-- Link to your main CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Flight Status</h1>
+        <div id="flightInfo">
+            <p><strong>Flight Number:</strong> <span id="flight-number"></span></p>
+            <p><strong>Source:</strong> <span id="source"></span></p>
+            <p><strong>Destination:</strong> <span id="destination"></span></p>
+            <p><strong>Date:</strong> <span id="date"></span></p>
+            <p><strong>Status:</strong> <span id="status"></span></p>
+            <p><strong>Terminal:</strong> <span id="terminal"></span></p>
+            <p><strong>Gate:</strong> <span id="gate"></span></p>
+        </div>
+        <button onclick="goBack()">Check Another Flight</button>
+    </div>
+
+    <script>
+        // Get URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const flightNumber = params.get('flight-number');
+        const source = params.get('source');
+        const destination = params.get('destination');
+        const date = params.get('date');
+
+        // Set flight information
+        document.getElementById('flight-number').textContent = flightNumber;
+        document.getElementById('source').textContent = source;
+        document.getElementById('destination').textContent = destination;
+        document.getElementById('date').textContent = date;
+
+        // Simulate flight status retrieval
+        function getFlightStatus() {
+            // Simulate a status check based on flight number
+            const statuses = ["On Time", "Delayed", "Cancelled", "Boarding"];
+            const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+
+            // Display the flight status
+            document.getElementById('status').textContent = randomStatus;
+
+            // Simulated terminal and gate information based on the flight number
+            document.getElementById('terminal').textContent = "T1"; // Example terminal
+            document.getElementById('gate').textContent = "G4"; // Example gate
+        }
+
+        // Run the status retrieval function
+        getFlightStatus();
+
+        // Go back to the form page
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('image2.png'); /* Background image */
+    background-size: cover; /* Cover entire background */
+    color: #333; /* Text color */
+    margin: 0;
+    padding: 20px; /* Add padding around the body */
+  }
+  
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background for better readability */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #4CAF50; /* Green color for heading */
+  }
+  
+  .details {
+    margin-bottom: 20px;
+    font-size: 16px; /* Consistent font size */
+  }
+  
+  button {
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  #confirmation {
+    text-align: center;
+    margin-top: 20px;
+    display: none; /* Initially hidden */
+    font-size: 18px; /* Slightly larger font for confirmation message */
+    color: #4CAF50; /* Green color for confirmation message */
+  }
+  

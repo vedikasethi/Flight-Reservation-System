@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Booking Page</title>
+    <link rel="stylesheet" href="booking_page_styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Airline Booking</h1>
+        <form id="flightForm" action="flight_results.html" method="GET">
+            <div class="form-group">
+                <label for="source">Source</label>
+                <select id="source" name="source" required>
+                    <option value="" disabled selected>Select Source</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Bengaluru">Bengaluru</option>
+                </select>
+                
+                <select id="destination" name="destination" required>
+                    <option value="" disabled selected>Select Destination</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Bengaluru">Bengaluru</option>
+                </select>
+                
+            </div>
+
+            <div class="form-group">
+                <label for="tripType">Trip Type</label>
+                <div class="trip-options">
+                    <input type="radio" id="oneway" name="tripType" value="oneway" checked>
+                    <label for="oneway">One Way</label>
+
+                    <input type="radio" id="roundtrip" name="tripType" value="roundtrip">
+                    <label for="roundtrip">Round Trip</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="departure">Departure Date</label>
+                <input type="date" id="departure" name="departure" required>
+            </div>
+
+            <div class="form-group" id="return-group" style="display: none;">
+                <label for="return">Return Date</label>
+                <input type="date" id="return" name="return">
+            </div>
+
+            <div class="form-group">
+                <label for="class">Travel Class</label>
+                <select id="class" name="class" required>
+                    <option value="" disabled selected>Select Class</option>
+                    <option value="economy">Economy</option>
+                    <option value="business">Business</option>
+                    <option value="first">First Class</option>
+                </select>
+            </div>
+
+           
+
+            <!-- Date-Based Price Information -->
+            <div class="form-group">
+                <label for="priceIndicator">Price Suggestion</label>
+                <div id="priceIndicator" class="price-indicator">
+                    <span>You may pay less if you choose an earlier date!</span>
+                </div>
+            </div>
+
+            <button type="submit">Book Flight</button>
+        </form>
+    </div>
+
+    <script>
+        // Show or hide return date based on trip type selection
+        const roundTripRadio = document.getElementById('roundtrip');
+        const oneWayRadio = document.getElementById('oneway');
+        const returnGroup = document.getElementById('return-group');
+
+        roundTripRadio.addEventListener('change', function() {
+            returnGroup.style.display = 'block';
+        });
+
+        oneWayRadio.addEventListener('change', function() {
+            returnGroup.style.display = 'none';
+        });
+
+        // Price change based on selected departure date
+        document.getElementById('departure').addEventListener('change', function() {
+            const selectedDate = new Date(this.value);
+            const currentDate = new Date();
+            const priceIndicator = document.getElementById('priceIndicator');
+
+            if (selectedDate.getTime() - currentDate.getTime() > 7 * 24 * 60 * 60 * 1000) {
+                priceIndicator.innerHTML = "<span>You may pay less if you choose an earlier date!</span>";
+                priceIndicator.style.color = 'green';
+            } else {
+                priceIndicator.innerHTML = "<span>Prices may increase due to close booking date.</span>";
+                priceIndicator.style.color = 'red';
+            }
+        });
+
+        // Add this code to the original web page's JavaScript file
+        const form = document.getElementById('flightForm');
+
+        form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const source = document.getElementById('source').value;
+        const destination = document.getElementById('destination').value;
+
+        const url = `flight_results.html?source=${source}&destination=${destination}`;
+        window.location.href = url;
+        });
+    </script>
+</body>
+</html>

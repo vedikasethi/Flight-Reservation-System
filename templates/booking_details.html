@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Details</title>
+  <link rel="stylesheet" href="booking_details.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('image2.png'); /* Background image */
+      background-size: cover; /* Cover entire background */
+      color: #333; /* Text color */
+      margin: 0;
+      padding: 20px; /* Add padding around the body */
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background for better readability */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #4CAF50; /* Green color for heading */
+    }
+
+    .details {
+      margin-bottom: 20px;
+      font-size: 16px; /* Consistent font size */
+    }
+
+    button {
+      display: block;
+      width: 200px;
+      margin: 0 auto;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #4CAF50; /* Green */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #confirmation {
+      text-align: center;
+      margin-top: 20px;
+      display: none; /* Initially hidden */
+      font-size: 18px; /* Slightly larger font for confirmation message */
+      color: #4CAF50; /* Green color for confirmation message */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Booking Details</h1>
+    <div class="details">
+      <p><strong>Flight ID:</strong> <span id="flightId"></span></p>
+      <p><strong>Source:</strong> <span id="source"></span></p>
+      <p><strong>Destination:</strong> <span id="destination"></span></p>
+      <p><strong>Departure:</strong> <span id="departure"></span></p>
+      <p><strong>Arrival:</strong> <span id="arrival"></span></p>
+      <p><strong>Cost:</strong> <span id="cost"></span></p>
+      <p><strong>Cancellation Probability:</strong> <span id="cancellation"></span>%</p>
+    </div>
+    <button id="confirmBookingButton">Confirm Booking</button>
+    <div id="confirmation">
+      <p>Booking Confirmed! Thank you for choosing us.</p>
+    </div>
+  </div>
+
+  <script>
+    // Get query parameters from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    document.getElementById('flightId').textContent = urlParams.get('flightId'); // This will show the flight ID
+    document.getElementById('source').textContent = urlParams.get('source');
+    document.getElementById('destination').textContent = urlParams.get('destination');
+    document.getElementById('departure').textContent = urlParams.get('departure');
+    document.getElementById('arrival').textContent = urlParams.get('arrival');
+    document.getElementById('cost').textContent = urlParams.get('cost');
+    document.getElementById('cancellation').textContent = urlParams.get('cancellation');
+
+    document.getElementById('confirmBookingButton').addEventListener('click', function () {
+      document.getElementById('confirmation').style.display = 'block'; // Show confirmation message
+    });
+  </script>
+</body>
+
+</html>

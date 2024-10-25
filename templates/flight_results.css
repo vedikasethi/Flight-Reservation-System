@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('image2.png'); /* Set the background image */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the background from repeating */
+    margin: 0;
+    padding: 20px;
+    color: #fff; /* Set text color to white for contrast */
+}
+
+.container {
+    max-width: 1200px; /* Set a max width for the container */
+    margin: auto; /* Center the container */
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for contrast */
+    padding: 20px; /* Padding inside the container */
+    border-radius: 10px; /* Rounded corners for the container */
+}
+
+h1 {
+    text-align: center;
+    color: #fff; /* White text color for headers */
+}
+
+.flight-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    display: inline-block;
+    width: 300px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s; /* Add transition for hover effect */
+    background-color: #fff; /* White background for cards */
+    border-radius: 5px; /* Slightly rounded corners */
+}
+
+.flight-card h2 {
+    font-size: 18px;
+    margin-top: 0;
+    color: #007bff; /* Bootstrap primary color for headings */
+}
+
+.flight-card p {
+    margin-bottom: 10px;
+    color: #555; /* Slightly lighter text color for paragraphs */
+}
+
+/* Hover effects for flight cards */
+.flight-card:hover {
+    transform: translateY(-5px); /* Lift the card up slightly */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}

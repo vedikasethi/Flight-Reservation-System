@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Excel File Reader</title>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.16.9/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <input type="file" id="excelFile" accept=".xlsx, .xls, .xlsm">
+  <div id="excelData"></div>
+
+  <script>
+    const excelFileInput = document.getElementById('excelFile');
+
+    excelFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        const workbook = XLSX.read(event.target.result, { type: 'binary' });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const data = XLSX.utils.sheet_to_json(sheet);
+
+        const dataContainer = document.getElementById('excelData');
+
+        dataContainer.innerHTML = '';
+        data.forEach((row) => {
+          const rowElement = document.createElement('div');
+          rowElement.innerHTML = `
+            <p>${row['Sr. No.']} ${row['Test Case']} ${row['FCFS']}</p>
+          `;
+          dataContainer.appendChild(rowElement);
+        });
+      };
+
+      reader.readAsBinaryString(file);
+    });
+  </script>
+</body>
+</html>

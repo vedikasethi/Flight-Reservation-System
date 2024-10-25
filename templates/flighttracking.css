@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif; /* Changed to match previous styles */
+}
+
+body {
+    background-image: url('image2.png'); /* Background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container {
+    width: 400px; /* Container width */
+    margin: 50px auto; /* Center container */
+    padding: 20px; /* Inner padding */
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
+    border-radius: 15px; /* Rounded corners */
+    opacity: .9; /* Slightly transparent */
+}
+
+h1 {
+    text-align: center; /* Center title */
+    margin-bottom: 20px; /* Space below title */
+    color: #333; /* Title color */
+}
+
+form {
+    display: flex; /* Flex display for form */
+    flex-direction: column; /* Column layout */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Space between form groups */
+}
+
+label {
+    margin-bottom: 5px; /* Space below labels */
+    font-weight: bold; /* Bold labels */
+}
+
+input[type="text"],
+input[type="date"] {
+    width: 100%; /* Full width inputs */
+    padding: 8px; /* Inner padding */
+    margin-top: 5px; /* Space above inputs */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 5px; /* Rounded input corners */
+}
+
+button {
+    padding: 10px; /* Button padding */
+    background-color: #ff004f; /* Button color */
+    color: white; /* Button text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded button corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+button:hover {
+    background-color: #bd315d; /* Darker color on hover */
+}
+
+/* Background overlay for the entire body */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    z-index: -1; /* Behind other content */
+}
